@@ -4,7 +4,7 @@ let error = document.querySelectorAll('.error')
 
 
 async function loginUser() {
-    const url = "http://13.59.56.191/login"
+    const url = "http://13.59.56.191:4000/login"
     const dadosDoUsuario = {
         email: emailInput.value,
         password: passwordInput.value
