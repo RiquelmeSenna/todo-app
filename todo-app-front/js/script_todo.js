@@ -16,7 +16,7 @@ async function getAll() {
         return;
     }
 
-    const url = "https://13.59.56.191/task"
+    const url = "https://13.59.56.191:4000/task"
 
     const response = await fetch(url, {
         method: 'GET',
