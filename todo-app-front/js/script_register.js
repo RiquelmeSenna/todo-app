@@ -3,7 +3,7 @@ let nameInput = document.querySelector('#name-input')
 let passwordInput = document.querySelector('#password-input')
 async function registerUser() {
 
-    const url = 'http://13.59.56.191/register'
+    const url = 'http://13.59.56.191:4000/register'
 
     const dadosUsuario = {
         email: emailInput.value,
