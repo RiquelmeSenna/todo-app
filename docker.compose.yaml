@@ -1,0 +1,40 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo-todo
+    restart: always
+    ports:
+      - "27017:27017"
+    command: [ "mongod", "--replSet", "rs0", "--bind_ip_all" ]
+    volumes:
+      - mongo_data:/data/db
+  mongo-init-replica:
+    image: mongo:latest
+    depends_on:
+      - mongo
+    entrypoint: [ "bash", "-c", "sleep 5 && mongosh --host mongo:27017 < /docker-entrypoint-initdb.d/init-replica.js" ]
+    volumes:
+      - ./init-replica.js:/docker-entrypoint-initdb.d/init-replica.js:ro
+  api:
+    container_name: todo-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+    env_file: .env
+  todo-app-front:
+    container_name: todo-app-front
+    build:
+      context: ./todo-app-front
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+
+volumes:
+  mongo_data:
