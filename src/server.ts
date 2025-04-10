@@ -13,6 +13,6 @@ server.use(cors({ exposedHeaders: 'Authorization' }))
 
 server.use('/', router)
 
-server.listen(process.env.PORT, () => {
-    console.log(`Servidor rodando na porta ${process.env.PORT}`)
-})
+server.listen(4000, '0.0.0.0', () => {
+    console.log('Servidor rodando na porta 4000');
+});
